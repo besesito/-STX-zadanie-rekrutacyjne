@@ -1,0 +1,9 @@
+{% include "messages.html" %}
+<button class="btn btn-secondary mt-2 d-block m-auto"
+        data-bs-toggle="modal"
+        data-bs-target="#modal"
+        hx-get="{% url 'list' %}"
+        hx-target="#list"
+>
+  Zamknij
+</button>

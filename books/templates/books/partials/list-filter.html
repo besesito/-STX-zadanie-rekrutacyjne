@@ -1,0 +1,77 @@
+{% load crispy_forms_tags %}
+
+<form id="filter" class="m-2" hx-get="{% url 'list' %}" hx-trigger="keyup from:.form-control delay:300ms">
+  <div class="row">
+    <div class="col-2">
+      {{ filter.form.title|as_crispy_field }}
+    </div>
+    <div class="col-2">
+      {{ filter.form.author|as_crispy_field }}
+    </div>
+    <div class="col-2">
+      {{ filter.form.language|as_crispy_field }}
+    </div>
+
+    <div class="col-2">
+      {{ filter.form.ordering|as_crispy_field }}
+    </div>
+    <div class="col-2">
+      {{ filter.form.published_date|as_crispy_field }}
+    </div>
+  </div>
+</form>
+
+<table class="table table-dark table-striped">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Tytuł</th>
+    <th scope="col">Autor</th>
+    <th scope="col">Data publikacji</th>
+    <th scope="col">Numer ISBN</th>
+    <th scope="col">Liczba stron</th>
+    <th scope="col">Zdjęcie okładki</th>
+    <th scope="col">Język publikacji</th>
+    <th scope="col"></th>
+  </thead>
+  <tbody>
+  {% for book in books %}
+  <tr>
+    <th>{{ book.id }}</th>
+    <th>{{ book.title }}</th>
+    <td>{{ book.author|default:"" }}</td>
+    <td>{{ book.published_date|default:"" }}</td>
+    <td>{{ book.isbn|default:"" }}</td>
+    <td>{{ book.page_count|default:"" }}</td>
+    <td>
+      {% if book.cover_url %}
+      <a href="#" hx-get="{% url 'display_cover' book.id %}" hx-target="#form"
+         data-bs-toggle="modal"
+         data-bs-target="#modal">
+        Zobacz
+      </a>
+      {% endif %}
+    </td>
+    <td>{{ book.language|default:"" }}</td>
+    <td>
+      <a href="" class="btn btn-primary btn-sm m-1" hx-get="{% url 'update' book.pk %}" hx-target="#form"
+         data-bs-toggle="modal"
+         data-bs-target="#modal">
+        Edytuj
+      </a>
+      <a href="" class="btn btn-danger btn-sm m-1" hx-get="{% url 'delete' book.pk %}" hx-target="#form"
+         data-bs-toggle="modal"
+         data-bs-target="#modal">
+        Usuń
+      </a>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% include "books/partials/paginator.html" %}
+
+<div id="messages" hx-swap-oob="true" class="my-2">
+  {% include 'messages.html' %}
+</div>

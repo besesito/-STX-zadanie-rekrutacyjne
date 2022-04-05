@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+<form class="p-3"
+      onsubmit="buttonForm.disabled = true; return true;"
+      hx-post="{% url 'import_books' %}"
+      hx-target="#form_form"
+>
+  {% csrf_token %}
+  <h4 class="text-center">Importuj książki z Google Books API</h4>
+  <div id="form_form">
+    {{ form|crispy }}
+    <button name="buttonForm"
+            id="buttonForm"
+            class="btn btn-primary mt-2 d-block m-auto"
+            type="submit">
+      Wyszukaj i importuj
+    </button>
+  </div>
+</form>

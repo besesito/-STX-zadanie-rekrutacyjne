@@ -1,0 +1,9 @@
+<div id="messages">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="text-center alert alert-{{ message.tags }} m-0">
+    {{ message|safe }}
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>

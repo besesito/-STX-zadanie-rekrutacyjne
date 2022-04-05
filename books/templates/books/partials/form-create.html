@@ -1,0 +1,13 @@
+{% load crispy_forms_tags %}
+<form class="p-3"
+      onsubmit="buttonForm.disabled = true; return true;"
+      hx-post="{% url 'create' %}"
+      hx-target="#list">
+  {% csrf_token %}
+  <h4 class="text-center">Dodaj nową książkę</h4>
+  <div id="form_form">
+  {{ form|crispy }}
+  <div id="buttonForm"></div>
+  {% include "books/partials/form-button.html" %}
+  </div>
+</form>

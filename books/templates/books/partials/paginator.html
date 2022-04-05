@@ -1,0 +1,35 @@
+<div class="text-center mb-1">
+  {% if request.path != request.get_full_path %}
+  <span>
+    {% if page_obj.has_previous %}
+      <a href="#" hx-get="{{ request.get_full_path }}&page=1">&laquo; pierwsza</a>
+      <a href="#" hx-get="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}">poprzednia</a>
+    {% endif %}
+
+    <span>
+        Strona {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="#" hx-get="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}">następna</a>
+      <a href="#" hx-get="{{ request.get_full_path }}&page={{ page_obj.paginator.num_pages }}">ostatnia &raquo;</a>
+    {% endif %}
+  </span>
+  {% else %}
+  <span>
+    {% if page_obj.has_previous %}
+        <a href="#" hx-get="{{ request.get_full_path }}?page=1">&laquo; pierwsza</a>
+        <a href="#" hx-get="{{ request.get_full_path }}?page={{ page_obj.previous_page_number }}">poprzednia</a>
+    {% endif %}
+
+    <span>
+        Strona {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="#" hx-get="{{ request.get_full_path }}?page={{ page_obj.next_page_number }}">następna</a>
+        <a href="#" hx-get="{{ request.get_full_path }}?page={{ page_obj.paginator.num_pages }}">ostatnia &raquo;</a>
+    {% endif %}
+  </span>
+  {% endif %}
+</div>
