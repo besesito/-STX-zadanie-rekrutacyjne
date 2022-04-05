@@ -1,6 +1,9 @@
 {% load crispy_forms_tags %}
 
-<form id="filter" class="m-2" hx-get="{% url 'list' %}" hx-trigger="keyup from:.form-control delay:300ms">
+<form
+        id="filter" class="m-2"
+        hx-get="{% url 'list' %}"
+        hx-trigger="change from:.form-control delay:300ms, keyup from:.form-control delay:300ms">
   <div class="row">
     <div class="col-2">
       {{ filter.form.title|as_crispy_field }}
