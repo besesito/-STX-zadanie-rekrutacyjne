@@ -21,7 +21,7 @@ class Book(models.Model):
         verbose_name="numer ISBN",
         unique=True,
         error_messages={"unique": "Istnieje już książka o takim numerze ISBN"},
-        validators=[MinValueValidator(1)]
+        validators=[MinValueValidator(1)],
     )
     page_count = models.PositiveIntegerField(
         blank=True, null=True, verbose_name="liczba stron"
